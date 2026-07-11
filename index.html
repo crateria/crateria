@@ -526,12 +526,13 @@ sudo apt update && sudo apt install trance morphball</pre>
             <h1>Trance CLI & TUI</h1>
             <p>Trance is managed using the <code>trance</code> CLI tool. It interacts directly with the background daemon over D-Bus and provides an interactive terminal user interface (TUI) to manage settings.</p>
             
-            <h2>Interactive TUI</h2>
-            <p>To launch the interactive terminal interface to monitor status, toggle configurations, and preview screensaver plugins, run:</p>
+            <h2>Interactive TUI Dashboard</h2>
+            <p>To launch the full Crossterm and Ratatui terminal dashboard to monitor daemon status, control active states, toggle settings, and trigger live previews, run:</p>
             <div class="code-container">
                 <button class="copy-button" onclick="copyCode('runTui')">Copy</button>
-                <pre class="code-block" id="runTui">trance interactive</pre>
+                <pre class="code-block" id="runTui">trance-tui</pre>
             </div>
+            <p><em>Note: A lightweight interactive CLI menu can also be triggered directly via: <code>trance interactive</code></em></p>
 
             <h2>Command-Line Interface</h2>
             <table>
