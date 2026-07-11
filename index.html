@@ -398,19 +398,21 @@
             </div>
 
             <div class="nav-group">
-                <div class="nav-header">Trance Daemon</div>
+                <div class="nav-header">Trance Screensaver</div>
                 <ul class="nav-list">
-                    <li class="nav-item" id="nav-trance-usage" onclick="switchSection('trance-usage')">CLI & TUI Usage</li>
+                    <li class="nav-item" id="nav-trance-cui" onclick="switchSection('trance-cui')">Command Line (CUI)</li>
+                    <li class="nav-item" id="nav-trance-tui" onclick="switchSection('trance-tui')">Interactive Dashboard (TUI)</li>
                     <li class="nav-item" id="nav-trance-config" onclick="switchSection('trance-config')">Configuration Helper</li>
                     <li class="nav-item" id="nav-trance-dbus" onclick="switchSection('trance-dbus')">D-Bus API Reference</li>
-                    <li class="nav-item" id="nav-trance-plugins" onclick="switchSection('trance-plugins')">Plugin Development</li>
+                    <li class="nav-item" id="nav-trance-plugins" onclick="switchSection('trance-plugins')">Plugin SDK</li>
                 </ul>
             </div>
 
             <div class="nav-group">
                 <div class="nav-header">Morphball Archiver</div>
                 <ul class="nav-list">
-                    <li class="nav-item" id="nav-morphball-usage" onclick="switchSection('morphball-usage')">CLI & TUI Usage</li>
+                    <li class="nav-item" id="nav-morphball-cui" onclick="switchSection('morphball-cui')">Command Line (CUI)</li>
+                    <li class="nav-item" id="nav-morphball-tui" onclick="switchSection('morphball-tui')">Interactive TUI</li>
                     <li class="nav-item" id="nav-morphball-security" onclick="switchSection('morphball-security')">Sandboxing Engine</li>
                 </ul>
             </div>
@@ -520,21 +522,11 @@ sudo apt update && sudo apt install trance morphball</pre>
             <h2>Contributing & Policies</h2>
             <p>Development is hosted publicly on GitHub. Please submit pull requests to the individual project repositories. Contributions are governed by the Apache-2.0 license and the organization contributing guides.</p>
         </section>
-
-        <!-- Trance CLI & TUI Usage Section -->
-        <section id="trance-usage" class="doc-section">
-            <h1>Trance CLI & TUI</h1>
-            <p>Trance is managed using the <code>trance</code> CLI tool. It interacts directly with the background daemon over D-Bus and provides an interactive terminal user interface (TUI) to manage settings.</p>
+        <section id="trance-cui" class="doc-section">
+            <h1>Trance Command Line (CUI)</h1>
+            <p>The <code>trance</code> CLI tool is a non-interactive client designed for scripting, quick configuration edits, and querying daemon metrics directly from a terminal or system hooks.</p>
             
-            <h2>Interactive TUI Dashboard</h2>
-            <p>To launch the full Crossterm and Ratatui terminal dashboard to monitor daemon status, control active states, toggle settings, and trigger live previews, run:</p>
-            <div class="code-container">
-                <button class="copy-button" onclick="copyCode('runTui')">Copy</button>
-                <pre class="code-block" id="runTui">trance-tui</pre>
-            </div>
-            <p><em>Note: A lightweight interactive CLI menu can also be triggered directly via: <code>trance interactive</code></em></p>
-
-            <h2>Command-Line Interface</h2>
+            <h2>Command Reference</h2>
             <table>
                 <thead>
                     <tr>
@@ -547,51 +539,75 @@ sudo apt update && sudo apt install trance morphball</pre>
                     <tr>
                         <td><code>trance status [--json]</code></td>
                         <td><code>st</code></td>
-                        <td>Shows the current running status, screensaver selection, and monitor metrics.</td>
+                        <td>Queries the background daemon via D-Bus and displays the system lock state, battery info, and running metrics.</td>
                     </tr>
                     <tr>
                         <td><code>trance list</code></td>
                         <td><code>ls</code></td>
-                        <td>Lists all currently installed screensaver plugins.</td>
+                        <td>Scans the system directories and lists all dynamically loaded screensaver plugins.</td>
                     </tr>
                     <tr>
                         <td><code>trance preview &lt;saver&gt;</code></td>
                         <td><code>p</code></td>
-                        <td>Launches a live fullscreen preview of the specified screensaver.</td>
+                        <td>Spawns a fullscreen window to test the specified screensaver immediately.</td>
                     </tr>
                     <tr>
                         <td><code>trance stop</code></td>
                         <td>-</td>
-                        <td>Stops the active screensaver preview or idle presentation.</td>
+                        <td>Instructs the daemon to kill the active screensaver window.</td>
                     </tr>
                     <tr>
                         <td><code>trance enable</code> / <code>disable</code></td>
                         <td><code>on</code> / <code>off</code></td>
-                        <td>Enables or disables idle monitoring.</td>
+                        <td>Toggles whether the daemon registers idle inputs to trigger screensavers.</td>
                     </tr>
                     <tr>
                         <td><code>trance timeout &lt;minutes&gt;</code></td>
                         <td><code>t</code></td>
-                        <td>Sets the idle timeout duration (1 to 240 minutes).</td>
+                        <td>Sets the idle duration threshold (1 to 240 minutes).</td>
                     </tr>
                     <tr>
                         <td><code>trance saver &lt;name&gt;</code></td>
                         <td>-</td>
-                        <td>Sets the default active screensaver plugin.</td>
+                        <td>Updates the default active screensaver.</td>
                     </tr>
                     <tr>
                         <td><code>trance doctor</code></td>
                         <td><code>doc</code></td>
-                        <td>Runs system diagnostics to detect compositor dynamic capabilities and setup errors.</td>
+                        <td>Runs system diagnostics (checks compositor handles, D-Bus session state, and library paths).</td>
                     </tr>
                 </tbody>
             </table>
         </section>
 
+        <!-- Trance TUI Section -->
+        <section id="trance-tui" class="doc-section">
+            <h1>Trance Terminal UI (TUI)</h1>
+            <p>Trance includes an interactive terminal user interface for real-time monitoring and layout configuration, avoiding the need to remember manual commands.</p>
+            
+            <h2>Launching the TUI Dashboard</h2>
+            <p>To run the full terminal user interface console, execute:</p>
+            <div class="code-container">
+                <button class="copy-button" onclick="copyCode('runTui')">Copy</button>
+                <pre class="code-block" id="runTui">trance-tui</pre>
+            </div>
+            
+            <h2>TUI Features</h2>
+            <ul>
+                <li><strong>Interactive Panels</strong>: Switch focus between general settings and screensaver listings.</li>
+                <li><strong>Live Control</strong>: Toggle idle activations, adjust idle timeouts, and change rendering scales with instant D-Bus feedback.</li>
+                <li><strong>Status Bar</strong>: Visual markers showing power states, GPU status, and session inhibitors.</li>
+            </ul>
+        </section>
+
         <!-- Trance Configuration Helper Section -->
         <section id="trance-config" class="doc-section">
             <h1>Configuration Helper</h1>
-            <p>Trance uses a TOML file at <code style="color:var(--accent-primary)">~/.config/trance/config.toml</code>. Toggle options below to dynamically generate your configuration file.</p>
+            
+            <h2>Why Configure Trance?</h2>
+            <p>Trance is designed to run silently as a background service. Adjusting configurations allows users to optimize performance (such as lowering rendering scale on low-end GPUs), customize idle timeout triggers, choose specific screensaver plugins, or toggle the FPS counter overlay for debugging.</p>
+            
+            <p>Configure Trance by editing <code>~/.config/trance/config.toml</code> or generate a config dynamically using the wizard below:</p>
             
             <div class="configurator-card">
                 <div class="configurator-form">
@@ -628,7 +644,16 @@ sudo apt update && sudo apt install trance morphball</pre>
         <!-- Trance D-Bus API Reference Section -->
         <section id="trance-dbus" class="doc-section">
             <h1>D-Bus API Reference</h1>
-            <p>The screensaver daemon hosts control methods over the session bus on interface name <code style="color:var(--text-primary)">io.github.crateria.trance</code>.</p>
+            
+            <h2>Why Expose a D-Bus Interface?</h2>
+            <p>Exposing control interfaces over D-Bus allows Trance to integrate seamlessly with the rest of the desktop environment. It allows:</p>
+            <ul>
+                <li><strong>Lock Screens</strong> (like Wayland compositor locks) to securely request screensaver activation or check status.</li>
+                <li><strong>Panel Applets</strong> (like the COSMIC Desktop panel widget) to toggle settings or change active screensavers.</li>
+                <li><strong>CLI clients</strong> (like <code>trance</code> and <code>trance-tui</code>) to control settings dynamically without direct file writes or process restarts.</li>
+            </ul>
+            
+            <p>The daemon registers the <code>io.github.crateria.trance</code> service on the Session Bus:</p>
             
             <table>
                 <thead>
@@ -686,10 +711,10 @@ trance_api::register_plugin!(CustomEffect);</pre>
             </div>
         </section>
 
-        <!-- Morphball CLI & TUI Usage Section -->
-        <section id="morphball-usage" class="doc-section">
-            <h1>CLI & TUI Usage</h1>
-            <p>Morphball supports high-performance file compression, extraction, and archive validation.</p>
+        <!-- Morphball CUI Section -->
+        <section id="morphball-cui" class="doc-section">
+            <h1>Morphball Command Line (CUI)</h1>
+            <p>Morphball is designed as a secure, high-performance command-line utility for compression, extraction, and integrity validation on Linux systems.</p>
             
             <h2>Command Reference</h2>
             <table>
@@ -702,37 +727,59 @@ trance_api::register_plugin!(CustomEffect);</pre>
                 <tbody>
                     <tr>
                         <td><code>morphball pack &lt;src&gt; &lt;archive&gt;</code></td>
-                        <td>Creates a new archive. Append metadata indexes using <code>MORPHBALL_RESERVES=1</code>.</td>
+                        <td>Compresses files/directories into ZIP, 7z, or tar.gz format.</td>
                     </tr>
                     <tr>
                         <td><code>morphball unpack &lt;archive&gt; [out_dir]</code></td>
-                        <td>Extracts files securely under a Landlock sandbox layer.</td>
+                        <td>Securely extracts archives under the Landlock sandbox layer.</td>
                     </tr>
                     <tr>
                         <td><code>morphball doctor [archive]</code></td>
-                        <td>Analyzes archive structures and restores corrupted blocks.</td>
+                        <td>Runs self-healing diagnostics to repair corrupt sections of an archive.</td>
                     </tr>
                 </tbody>
             </table>
         </section>
 
+        <!-- Morphball TUI Section -->
+        <section id="morphball-tui" class="doc-section">
+            <h1>Morphball Terminal UI</h1>
+            <p>Morphball features an interactive terminal application (TUI) to browse and manage archive operations without manual commands.</p>
+            
+            <h2>Launching the TUI</h2>
+            <p>To start the interactive console explorer, execute:</p>
+            <div class="code-container">
+                <button class="copy-button" onclick="copyCode('runMorphTui')">Copy</button>
+                <pre class="code-block" id="runMorphTui">morphball-tui</pre>
+            </div>
+            
+            <h2>TUI Features</h2>
+            <ul>
+                <li><strong>Visual Explorer</strong>: Navigate files and folder structures inside archives dynamically.</li>
+                <li><strong>Single-Key Extraction</strong>: Unpack individual files or directories directly from the interactive view.</li>
+                <li><strong>Compression Wizard</strong>: Step-by-step guides to compress paths with preset configurations.</li>
+            </ul>
+        </section>
+
         <!-- Morphball Sandboxing Engine Section -->
         <section id="morphball-security" class="doc-section">
             <h1>Sandboxing Engine</h1>
-            <p>Decompression operations run under a local best-effort **Landlock LSM Sandbox** configuration on Linux.</p>
             
-            <h2>How it works:</h2>
+            <h2>Why Sandboxing is Necessary</h2>
+            <p>Decompression libraries (e.g., zip, 7z, and gzip engines) are historically written in complex C/C++ code, presenting a large attack surface for buffer overflows, directory traversal exploits (e.g., extracting to <code>../../etc/shadow</code>), and dynamic memory bugs. If a developer or automated daemon decompresses an untrusted archive, the entire host environment could be compromised.</p>
+            
+            <h2>Defense-in-Depth with Landlock LSM</h2>
+            <p>Morphball leverages the <strong>Linux Landlock Security Module (LSM)</strong> to enforce kernel-level restrictions on the worker thread handling decompression. This guarantees that even if a zero-day vulnerability in the decompression engine is exploited:</p>
             <ul>
-                <li>The process initializes a custom Linux ruleset before parsing the archive headers.</li>
-                <li>Write access is strictly allowed only within the designated output directory.</li>
-                <li>Read-only handles are restricted to the source archive file and essential system linker paths (such as <code>/lib</code> and <code>/usr/lib</code>).</li>
-                <li>Any network interactions or file creation calls outside the target directory are terminated by the kernel.</li>
+                <li><strong>Directory Lockdown</strong>: The process is physically blocked from writing any files outside the designated output directory, neutralizing directory traversal attacks completely.</li>
+                <li><strong>Information Concealment</strong>: Read access is blocked for all sensitive user files, restricted exclusively to the target output directory, the input archive, and essential system dynamic library paths (like <code>/lib</code>, <code>/lib64</code>, and <code>/usr/lib</code>) required for execution.</li>
+                <li><strong>Resource Containment</strong>: The worker thread has no network permissions, file socket capabilities, or process management rights, preventing remote code execution (RCE) callbacks.</li>
             </ul>
         </section>
     </div>
 
     <script>
-        const sections = ['intro', 'install', 'about', 'trance-usage', 'trance-config', 'trance-dbus', 'trance-plugins', 'morphball-usage', 'morphball-security'];
+        const sections = ['intro', 'install', 'about', 'trance-cui', 'trance-tui', 'trance-config', 'trance-dbus', 'trance-plugins', 'morphball-cui', 'morphball-tui', 'morphball-security'];
 
         function switchSection(id) {
             // Remove active classes
