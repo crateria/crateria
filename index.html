@@ -400,6 +400,7 @@
             <div class="nav-group">
                 <div class="nav-header">Trance Daemon</div>
                 <ul class="nav-list">
+                    <li class="nav-item" id="nav-trance-usage" onclick="switchSection('trance-usage')">CLI & TUI Usage</li>
                     <li class="nav-item" id="nav-trance-config" onclick="switchSection('trance-config')">Configuration Helper</li>
                     <li class="nav-item" id="nav-trance-dbus" onclick="switchSection('trance-dbus')">D-Bus API Reference</li>
                     <li class="nav-item" id="nav-trance-plugins" onclick="switchSection('trance-plugins')">Plugin Development</li>
@@ -520,6 +521,72 @@ sudo apt update && sudo apt install trance morphball</pre>
             <p>Development is hosted publicly on GitHub. Please submit pull requests to the individual project repositories. Contributions are governed by the Apache-2.0 license and the organization contributing guides.</p>
         </section>
 
+        <!-- Trance CLI & TUI Usage Section -->
+        <section id="trance-usage" class="doc-section">
+            <h1>Trance CLI & TUI</h1>
+            <p>Trance is managed using the <code>trance</code> CLI tool. It interacts directly with the background daemon over D-Bus and provides an interactive terminal user interface (TUI) to manage settings.</p>
+            
+            <h2>Interactive TUI</h2>
+            <p>To launch the interactive terminal interface to monitor status, toggle configurations, and preview screensaver plugins, run:</p>
+            <div class="code-container">
+                <button class="copy-button" onclick="copyCode('runTui')">Copy</button>
+                <pre class="code-block" id="runTui">trance interactive</pre>
+            </div>
+
+            <h2>Command-Line Interface</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Command Syntax</th>
+                        <th>Alias</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>trance status [--json]</code></td>
+                        <td><code>st</code></td>
+                        <td>Shows the current running status, screensaver selection, and monitor metrics.</td>
+                    </tr>
+                    <tr>
+                        <td><code>trance list</code></td>
+                        <td><code>ls</code></td>
+                        <td>Lists all currently installed screensaver plugins.</td>
+                    </tr>
+                    <tr>
+                        <td><code>trance preview &lt;saver&gt;</code></td>
+                        <td><code>p</code></td>
+                        <td>Launches a live fullscreen preview of the specified screensaver.</td>
+                    </tr>
+                    <tr>
+                        <td><code>trance stop</code></td>
+                        <td>-</td>
+                        <td>Stops the active screensaver preview or idle presentation.</td>
+                    </tr>
+                    <tr>
+                        <td><code>trance enable</code> / <code>disable</code></td>
+                        <td><code>on</code> / <code>off</code></td>
+                        <td>Enables or disables idle monitoring.</td>
+                    </tr>
+                    <tr>
+                        <td><code>trance timeout &lt;minutes&gt;</code></td>
+                        <td><code>t</code></td>
+                        <td>Sets the idle timeout duration (1 to 240 minutes).</td>
+                    </tr>
+                    <tr>
+                        <td><code>trance saver &lt;name&gt;</code></td>
+                        <td>-</td>
+                        <td>Sets the default active screensaver plugin.</td>
+                    </tr>
+                    <tr>
+                        <td><code>trance doctor</code></td>
+                        <td><code>doc</code></td>
+                        <td>Runs system diagnostics to detect compositor dynamic capabilities and setup errors.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
         <!-- Trance Configuration Helper Section -->
         <section id="trance-config" class="doc-section">
             <h1>Configuration Helper</h1>
@@ -560,7 +627,7 @@ sudo apt update && sudo apt install trance morphball</pre>
         <!-- Trance D-Bus API Reference Section -->
         <section id="trance-dbus" class="doc-section">
             <h1>D-Bus API Reference</h1>
-            <p>The screensaver daemon hosts control methods over the session bus on interface name <code style="color:var(--text-primary)">io.github.ubermetroid.trance</code>.</p>
+            <p>The screensaver daemon hosts control methods over the session bus on interface name <code style="color:var(--text-primary)">io.github.crateria.trance</code>.</p>
             
             <table>
                 <thead>
@@ -664,7 +731,7 @@ trance_api::register_plugin!(CustomEffect);</pre>
     </div>
 
     <script>
-        const sections = ['intro', 'install', 'about', 'trance-config', 'trance-dbus', 'trance-plugins', 'morphball-usage', 'morphball-security'];
+        const sections = ['intro', 'install', 'about', 'trance-usage', 'trance-config', 'trance-dbus', 'trance-plugins', 'morphball-usage', 'morphball-security'];
 
         function switchSection(id) {
             // Remove active classes
