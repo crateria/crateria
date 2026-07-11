@@ -1,15 +1,16 @@
+<p align="center">
+  <a href="https://github.com/crateria">
+    <img src="assets/crateria-header.jpg" alt="Crateria" width="800">
+  </a>
+</p>
+
+<p align="center">
+  <img src="assets/icon.png" width="72" height="72" alt="Crateria">
+</p>
+
 # Crateria
 
-<p align="center">
-  <img src="assets/crateria.png" width="96" height="96" alt="Crateria">
-</p>
-
-<p align="center">
-  <strong>Linux desktop software in Rust</strong><br>
-  Organization map for <a href="https://github.com/crateria">github.com/crateria</a>
-</p>
-
-This repository is a landing page. It does not contain product source code.
+Organization map for [github.com/crateria](https://github.com/crateria). This repository does not contain product source code.
 
 ## Projects
 
