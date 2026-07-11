@@ -1,58 +1,28 @@
 <p align="center">
-  <a href="https://github.com/crateria">
+  <a href="https://crateria.github.io/">
     <img src="assets/crateria-header.jpg" alt="Crateria" width="100%">
   </a>
 </p>
 
-# Crateria
+# Crateria Documentation Hub
 
-Organization map for [github.com/crateria](https://github.com/crateria). This repository does not contain product source code.
+This repository contains the source code for the central Crateria documentation website.
 
-## Projects
+## Live Website
 
-| Repository | Description |
-|------------|-------------|
-| [trance](https://github.com/crateria/trance) | Wayland screensaver (daemon, CLI, TUI, COSMIC applet) |
-| [trance-plugins](https://github.com/crateria/trance-plugins) | Official screensaver effects |
-| [morphball](https://github.com/crateria/morphball) | Archive manager (CLI + TUI) |
-| [packages](https://github.com/crateria/packages) | APT and DNF package repositories |
-| [brand](https://github.com/crateria/brand) | Brand kit (header source of truth) |
-| [.github](https://github.com/crateria/.github) | Org profile and community health files |
+Visit the documentation portal:
+👉 **[https://crateria.github.io/](https://crateria.github.io/)**
 
-## Install
-
-Use the signed package repositories:
-
-- Index: [crateria.github.io/packages](https://crateria.github.io/packages/)
-- Full install steps: each product README, or the organization profile at
-  [github.com/crateria](https://github.com/crateria)
+## Local Development
 
 ```bash
-# Fedora
-sudo curl -fsSL https://crateria.github.io/packages/rpm/crateria.repo \
-  -o /etc/yum.repos.d/crateria.repo
-sudo dnf install trance   # or: morphball
+# Clone the repository
+git clone https://github.com/crateria/crateria.github.io.git
+cd crateria.github.io
+
+# Open the site locally
+xdg-open index.html
 ```
-
-```bash
-# Debian / Ubuntu / Pop!_OS
-sudo mkdir -p /etc/apt/keyrings
-sudo curl -fsSL https://crateria.github.io/packages/apt/crateria-keyring.gpg \
-  -o /etc/apt/keyrings/crateria.gpg
-echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/crateria.gpg] https://crateria.github.io/packages/apt stable main" \
-  | sudo tee /etc/apt/sources.list.d/crateria.list
-sudo apt update && sudo apt install trance
-```
-
-## Contributing
-
-Open issues and pull requests on the **product** repository that owns the code.
-See [CONTRIBUTING.md](CONTRIBUTING.md) and the
-[organization contributing guide](https://github.com/crateria/.github/blob/main/CONTRIBUTING.md).
-
-## Security
-
-[Organization security policy](https://github.com/crateria/.github/blob/main/SECURITY.md)
 
 ## License
 
